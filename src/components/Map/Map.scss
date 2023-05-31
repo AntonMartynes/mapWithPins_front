@@ -1,0 +1,21 @@
+/*sizing of map container*/
+.leaflet-container {
+  height: 100vh;
+}
+
+.cluset-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-color: brown;
+
+  transform: translate(-25%, -25%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+  font-size: 1rem;
+}
+
