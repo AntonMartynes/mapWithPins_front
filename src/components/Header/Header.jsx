@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import './Header.scss';
 import { FormField } from '../Form/FormField';
 import { ThemeContext } from '../../App';
-import { CustomizedSwitches, MaterialUISwitch } from '../ToggleSwitch/Switch';
+import { CustomizedSwitches } from '../ToggleSwitch/Switch';
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -21,8 +21,8 @@ export const Header = () => {
           Add new point
         </Button>
 
-        {/* <ToggleSwitch /> */}
         <CustomizedSwitches />
+
         <Modal active={modalActive} setActive={setModalActive} className='header__modal'> 
           <h2 className='header__modal__name'>
             Add new point

@@ -55,7 +55,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export const CustomizedSwitches = () => {
   const globalTheme = useContext(ThemeContext);
   const switchFunction = globalTheme.toggleTheme;
-  console.log(switchFunction)
+
   return (
     <FormControlLabel
       onChange={switchFunction}

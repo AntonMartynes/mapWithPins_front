@@ -15,15 +15,15 @@ export const Map = () => {
       popUp: 'Hello 1',
     },
     {
-      geocode: [51.27, 30.3127],
+      geocode: [50.45156, 30.52530],
       popUp: 'Hello 1',
     },
     {
-      geocode: [50.28, 30.3127],
+      geocode: [50.46156, 30.52530],
       popUp: 'Hello 2',
     },
     {
-      geocode: [50.27, 30.3150],
+      geocode: [50.45696, 30.52930],
       popUp: 'Hello 3',
     }
   ];
@@ -46,7 +46,7 @@ export const Map = () => {
   
 
   return (
-    <MapContainer center={[50.30, 30.3127]} zoom={13} scrollWheelZoom={false}>
+    <MapContainer center={[50.45156, 30.52530]} zoom={13} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         url={mapURL}
