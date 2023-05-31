@@ -94,7 +94,13 @@ export const FormField = () => {
           helperText={formik.touched.longitude && formik.errors.longitude.slice(0, 28)}
         />
         
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button 
+          color="primary" 
+          variant="contained" 
+          fullWidth 
+          type="submit"
+          sx={{ my: 1.5 }}
+        >
           Submit
         </Button>
       </form>

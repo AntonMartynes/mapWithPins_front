@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $background_color_day;
 
   gap: 10px;
   border-top: 1px solid black;
@@ -18,7 +17,17 @@
     justify-content: center;
     gap: 50px
   }
+
+  &#dark {
+    background-color: $background_color_night;
+  }
+
+  &#light {
+    background-color: $background_color_day;
+  }
 }
+
+
 .footer__link {
   background-repeat: no-repeat;
   background-size: cover;

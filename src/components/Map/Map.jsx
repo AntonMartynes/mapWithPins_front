@@ -4,6 +4,8 @@ import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
 import './Map.scss';
+import { useContext } from 'react';
+import { ThemeContext } from '../../App';
 
 export const Map = () => {
   // markers
@@ -38,12 +40,16 @@ export const Map = () => {
     })
   }
 
+  const globalTheme = useContext(ThemeContext);
+  const mode = globalTheme.theme === 'light' ? '' : '_dark';
+  const mapURL = `https://tiles.stadiamaps.com/tiles/alidade_smooth${mode}/{z}/{x}/{y}{r}.png`;
+  
+
   return (
     <MapContainer center={[50.30, 30.3127]} zoom={13} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        // url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
-        url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+        url={mapURL}
       />
 
       <MarkerClusterGroup

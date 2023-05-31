@@ -5,6 +5,14 @@
   border-bottom: 1px solid black;
   width: 100%;
 
+  &#dark {
+    background-color: $background_color_night;
+  };
+
+  &#light {
+    background-color: $background_color_day;
+  };
+
   &__main {
     display: flex;
     flex-direction: column;
@@ -16,8 +24,6 @@
 
     margin: 0;
     padding: 15px;
-
-    background-color: $background_color_day;
 
     @include onDesktop {
       flex-direction: row;
@@ -37,4 +43,3 @@
     align-items: center;
   }
 }
-
