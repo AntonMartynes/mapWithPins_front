@@ -1,0 +1,51 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/variables';
+
+.footer {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $background_color_day;
+
+  gap: 10px;
+  border-top: 1px solid black;
+  padding: 15px;
+
+  @include onDesktop {
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px
+  }
+}
+.footer__link {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 30px;
+  width: 30px;
+}
+
+.mail {
+  background-image: url('../../assets/email-icon.png');
+}
+
+.phone {
+  background-image: url('../../assets/phone-icon.png');
+
+}
+
+.telegram {
+  background-image: url('../../assets/telegram-icon.png');
+
+}
+
+.git {
+  background-image: url('../../assets/github-icon.png');
+
+}
+
+.linkedin {
+  background-image: url('../../assets/linkedin-icon.png');
+
+}

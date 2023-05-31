@@ -1,6 +1,7 @@
 /*sizing of map container*/
 .leaflet-container {
   height: 100vh;
+  z-index: 1;
 }
 
 .cluset-icon {
