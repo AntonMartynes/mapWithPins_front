@@ -27,7 +27,7 @@ export const Header = () => {
           <h2 className='header__modal__name'>
             Add new point
           </h2>
-          <FormField />
+          <FormField setActive={setModalActive}  />
         </Modal>
 
       </div>

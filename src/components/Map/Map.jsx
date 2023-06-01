@@ -1,35 +1,43 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
 import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
-
-import './Map.scss';
-import { memo, useContext, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../App';
 import { GetCoordinates } from './features/coordinates-after-clicking';
 import { LocationButton } from './features/location-button';
 
+import 'leaflet/dist/leaflet.css'
+import './Map.scss';
+
 export const Map = memo(() => {
   const [map, setMap] = useState(null);
   // markers
-  const markers = [
-    {
-      geocode: [50.27, 30.3127],
-      popUp: 'Hello 1',
-    },
-    {
-      geocode: [50.45156, 30.52530],
-      popUp: 'Hello 1',
-    },
-    {
-      geocode: [50.46156, 30.52530],
-      popUp: 'Hello 2',
-    },
-    {
-      geocode: [50.45696, 30.52930],
-      popUp: 'Hello 3',
-    }
-  ];
+  const [markers, setMarkers] = useState([{
+    latitude: 50.45156,
+    longitude: 30.52530,
+    description: 'asdas',
+  }])
+
+  useEffect(() => {
+    const getMarkers = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/');
+        if (response.ok) {
+          const data = await response.json();
+          setMarkers(data);
+        } else {
+          console.log('Error:', response.status);
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+  
+    console.log(markers);
+  
+    getMarkers(); // Initial fetch
+  
+  }, [markers.length]);
 
   const center = [50.45156, 30.52530];
 
@@ -67,9 +75,9 @@ export const Map = memo(() => {
         iconCreateFunction={createCustomClusterIcon}
       >
         {markers.map(marker => (
-          <Marker position={marker.geocode} icon={customIcon}>
+          <Marker position={[marker.latitude, marker.longitude]} icon={customIcon}>
             <Popup>
-              {marker.popUp}
+            {marker.description}
             </Popup>
           </Marker>
         ))}

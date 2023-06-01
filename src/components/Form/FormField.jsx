@@ -22,7 +22,7 @@ const validationSchema = yup.object({
 
 });
 
-export const FormField = () => {
+export const FormField = ({ setActive }) => {
 
   const formik = useFormik({
     initialValues: {
@@ -32,9 +32,34 @@ export const FormField = () => {
       longitude: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+      onSubmit: (values) => {
+        const postData = async () => {
+          try {
+            const response = await fetch('http://localhost:8080/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(values, null, 2), // Replace `data` with your request payload
+            });
+      
+            if (response.ok) {
+              // Handle successful response
+              console.log('Post request successful');
+            } else {
+              // Handle error response
+              console.log('Error:', response.status);
+            }
+          } catch (error) {
+            // Handle network or other errors
+            console.log('Error:', error);
+          }
+        };
+      
+        postData();
+        setActive(false); // Call the function to make the POST request
+        // alert(JSON.stringify(values, null, 2));
+      },
   });
 
   return (
@@ -76,7 +101,7 @@ export const FormField = () => {
           value={formik.values.latitude}
           onChange={formik.handleChange}
           error={formik.touched.latitude && Boolean(formik.errors.latitude)}
-          helperText={formik.touched.latitude && formik.errors.latitude.slice(0, 28)}
+          helperText={formik.touched.latitude && formik.errors.latitude}
         />
 
         <TextField
@@ -89,7 +114,7 @@ export const FormField = () => {
           value={formik.values.longitude}
           onChange={formik.handleChange}
           error={formik.touched.longitude && Boolean(formik.errors.longitude)}
-          helperText={formik.touched.longitude && formik.errors.longitude.slice(0, 28)}
+          helperText={formik.touched.longitude && formik.errors.longitude}
         />
         
         <Button 
@@ -98,6 +123,7 @@ export const FormField = () => {
           fullWidth 
           type="submit"
           sx={{ my: 1.5 }}
+          // onClick={sendData()}
         >
           Submit
         </Button>
