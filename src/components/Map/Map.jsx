@@ -28,7 +28,7 @@ export const Map = memo(({ markers }) => {
 
   const globalTheme = useContext(ThemeContext);
   const mode = globalTheme.theme === 'light' ? '' : '_dark';
-  const mapURL = `https://tiles.stadiamaps.com/tiles/alidade_smooth${mode}/{z}/{x}/{y}{r}.png`;
+  const mapURL = `https://tiles.stadiamaps.com/tiles/alidade_smooth${mode}/{z}/{x}/{y}{r}.png?api_key=42b991fa-8b5c-4970-81e3-c3d35f26afdb`;
   
 
   return (
@@ -39,7 +39,7 @@ export const Map = memo(({ markers }) => {
       whenCreated={setMap}
     >
       <TileLayer
-        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         url={mapURL}
       />
 
