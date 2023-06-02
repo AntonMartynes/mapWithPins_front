@@ -11,6 +11,8 @@
 </p>
 
 <!-- Body -->
+You can watch the video presentation of the map at this [link](https://www.loom.com/share/20df7dbfce1c415bb624fbfc2ed89d07)
+
 You can view the frontend part of the map by simply opening the [link](https://antonmartynes.github.io/mapWithPins_front/).
 <br/>
 
