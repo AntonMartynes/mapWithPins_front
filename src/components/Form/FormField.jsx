@@ -22,7 +22,8 @@ const validationSchema = yup.object({
 
 });
 
-export const FormField = ({ setActive }) => {
+export const FormField = ({ setActive, markers, setMarkers }) => {
+  // console.log(markers);
 
   const formik = useFormik({
     initialValues: {
@@ -40,12 +41,13 @@ export const FormField = ({ setActive }) => {
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify(values, null, 2), // Replace `data` with your request payload
+              body: JSON.stringify(values, null, 2),
             });
       
             if (response.ok) {
               // Handle successful response
               console.log('Post request successful');
+              setMarkers([...markers, values]);
             } else {
               // Handle error response
               console.log('Error:', response.status);
@@ -55,10 +57,10 @@ export const FormField = ({ setActive }) => {
             console.log('Error:', error);
           }
         };
+        // console.log([...values]);
       
         postData();
-        setActive(false); // Call the function to make the POST request
-        // alert(JSON.stringify(values, null, 2));
+        setActive(false);
       },
   });
 

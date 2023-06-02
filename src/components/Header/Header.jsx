@@ -7,7 +7,7 @@ import { FormField } from '../Form/FormField';
 import { ThemeContext } from '../../App';
 import { CustomizedSwitches } from '../ToggleSwitch/Switch';
 
-export const Header = () => {
+export const Header = ({markers, setMarkers}) => {
   const [modalActive, setModalActive] = useState(false);
 
   const globalTheme = useContext(ThemeContext);
@@ -27,7 +27,11 @@ export const Header = () => {
           <h2 className='header__modal__name'>
             Add new point
           </h2>
-          <FormField setActive={setModalActive}  />
+          <FormField 
+            setActive={setModalActive}
+            markers={markers} 
+            setMarkers={setMarkers}
+          />
         </Modal>
 
       </div>
