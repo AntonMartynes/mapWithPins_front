@@ -35,7 +35,7 @@ export const Map = memo(({ markers }) => {
     <MapContainer 
       center={center} 
       zoom={13} 
-      scrollWheelZoom={false} 
+      scrollWheelZoom={true} 
       whenCreated={setMap}
     >
       <TileLayer
