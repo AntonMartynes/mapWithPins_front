@@ -3,8 +3,8 @@ import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { memo, useContext, useState } from 'react';
 import { ThemeContext } from '../../App';
-import { GetCoordinates } from './features/coordinates-after-clicking';
-import { LocationButton } from './features/location-button';
+import { GetCoordinates, LocationButton } from './features';
+
 
 import 'leaflet/dist/leaflet.css'
 import './Map.scss';

@@ -1,13 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { Map } from './components/Map/Map';
+import { Footer, Header, Map } from './components';
+
 
 
 export const ThemeContext = createContext(null);
 
 function App() {
   const [theme, setTheme] = useState('light');
+  const [isLoading, setIsLoading] = useState();
   // markers
   const [markers, setMarkers] = useState([{
     latitude: 50.45156,
@@ -18,6 +18,7 @@ function App() {
   useEffect(() => {
     const getMarkers = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch('http://localhost:8080/');
         if (response.ok) {
           const data = await response.json();
@@ -27,10 +28,12 @@ function App() {
         }
       } catch (error) {
         console.log('Error:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
   
-    getMarkers(); // Initial fetch
+    getMarkers();
   
   }, [markers.length]);
 
@@ -44,6 +47,7 @@ function App() {
         <Header 
           markers={markers} 
           setMarkers={setMarkers}
+          isLoading={isLoading}
         />
         <Map markers={markers}/>
         <Footer />

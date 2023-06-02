@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
@@ -22,10 +22,10 @@ const validationSchema = yup.object({
 
 });
 
-export const FormField = ({ setActive, markers, setMarkers }) => {
-  // console.log(markers);
+export const FormField = ({ setActive, markers, setMarkers, modalActive }) => {
 
-  const formik = useFormik({
+  const formik = useFormik(
+    {
     initialValues: {
       name: '',
       description: '',
@@ -57,12 +57,17 @@ export const FormField = ({ setActive, markers, setMarkers }) => {
             console.log('Error:', error);
           }
         };
-        // console.log([...values]);
       
         postData();
         setActive(false);
       },
   });
+
+  useEffect(() => {
+    if (!modalActive) {
+    formik.resetForm()
+    }
+  }, [modalActive])
 
   return (
     <div>
@@ -125,7 +130,6 @@ export const FormField = ({ setActive, markers, setMarkers }) => {
           fullWidth 
           type="submit"
           sx={{ my: 1.5 }}
-          // onClick={sendData()}
         >
           Submit
         </Button>
