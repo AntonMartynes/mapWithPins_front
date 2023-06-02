@@ -19,7 +19,7 @@ function App() {
     const getMarkers = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:8080/');
+        const response = await fetch('https://leaflet-app-martynes.herokuapp.com/');
         if (response.ok) {
           const data = await response.json();
           setMarkers(data);

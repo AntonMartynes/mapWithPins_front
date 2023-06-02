@@ -36,7 +36,7 @@ export const FormField = ({ setActive, markers, setMarkers, modalActive }) => {
       onSubmit: (values) => {
         const postData = async () => {
           try {
-            const response = await fetch('http://localhost:8080/', {
+            const response = await fetch('https://leaflet-app-martynes.herokuapp.com/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
