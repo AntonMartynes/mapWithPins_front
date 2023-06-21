@@ -45,3 +45,15 @@
     align-items: center;
   }
 }
+
+table {
+  border: 1px solid #ccc;  /* граница всей таблицы */
+}
+tr {
+  border: 1px solid #ccc;
+  text-align: center;  /* границы между строками */
+}
+td, th {
+  border: 1px solid #ccc;
+  letter-spacing: 1px;  /* границы между столбцами */
+}

@@ -10,8 +10,9 @@ import { CustomizedSwitches } from '../ToggleSwitch/Switch';
 import './Header.scss';
 
 export const Header = ({markers, setMarkers, isLoading}) => {
-  const [modalActive, setModalActive] = useState(false);
-  console.log(isLoading);
+  const [addingModalActive, setAddingModalActive] = useState(false);
+  const [showAllPointsModaL, setShowAllPointsModal] = useState(false);
+
 
   const globalTheme = useContext(ThemeContext);
   const mode = globalTheme.theme === 'light' ? 'light' : 'dark';
@@ -29,21 +30,49 @@ export const Header = ({markers, setMarkers, isLoading}) => {
       />
 
       <div className="header__buttons">
-        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setModalActive(true)}>
+        <Button variant="outlined" onClick={() => setShowAllPointsModal(true)}>
+          Show all points attribute
+        </Button>
+
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setAddingModalActive(true)}>
           Add new point
         </Button>
 
         <CustomizedSwitches />
 
-        {}
+        <div  className='header__modal'> 
+          <div className={showAllPointsModaL ? 'modal active' : 'modal'  } onClick={() => setShowAllPointsModal(false)}>
+            <div className={showAllPointsModaL ? 'modal__content active' : 'modal__content'} onClick={e => e.stopPropagation()}>
+              <table>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Latitude</th>
+                  <th>Longitude</th>
+                </tr>
+                {markers.map(marker => (
+                  <tr>
+                    <td>{marker.id}</td>
+                    <td>{marker.name}</td>
+                    <td>{marker.description}</td>
+                    <td>{marker.latitude}</td>
+                    <td>{marker.longitude}</td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          </div>   
+        </div>
 
-        <Modal active={modalActive} setActive={setModalActive} className='header__modal'> 
+        <Modal active={addingModalActive} setActive={setAddingModalActive} className='header__modal'> 
           <h2 className='header__modal__name'>
             Add new point
           </h2>
+
           <FormField
-            modalActive={modalActive} 
-            setActive={setModalActive}
+            modalActive={addingModalActive} 
+            setActive={setAddingModalActive}
             markers={markers} 
             setMarkers={setMarkers}
           />

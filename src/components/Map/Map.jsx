@@ -4,6 +4,8 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import { memo, useContext, useState } from 'react';
 import { ThemeContext } from '../../App';
 import { GetCoordinates, LocationButton } from './features';
+import Button from '@mui/material/Button';
+
 
 
 import 'leaflet/dist/leaflet.css'
@@ -49,8 +51,22 @@ export const Map = memo(({ markers }) => {
       >
         {markers.map(marker => (
           <Marker position={[marker.latitude, marker.longitude]} icon={customIcon}>
-            <Popup>
-            {marker.description}
+            <Popup className='popup'>
+              <div className="popup__text">
+                ID: {marker.id} 
+                <br/>
+                Name: {marker.name} 
+                <br/>
+                Description: {marker.description}
+                <br/>
+                Latitude: {marker.latitude}
+                <br/>
+                Longitude: {marker.longitude}
+                <br/>
+
+                <Button onClick={() => console.log(marker.id)}>delete</Button>               
+              </div>
+
             </Popup>
           </Marker>
         ))}
