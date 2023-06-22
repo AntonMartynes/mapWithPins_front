@@ -13,23 +13,29 @@ import './Map.scss';
 
 export const Map = memo(({ markers, setMarkers, AddMarkerOnClick }) => {
   const [map, setMap] = useState(null);
-  // //lat and lng by clicking
-  // const [markerPosition, setMarkerPosition] = useState([]);
 
-  // console.log(markerPosition.lat, markerPosition.lng);
+  const handleDelete = (markerId) => {
+    return async () => {
+      try {
+        const response = await fetch(`https://leaflet-app-martynes.herokuapp.com/${markerId}`, {
+          method: 'DELETE',
+        });
 
-  // function AddMarkerOnClick() {
-  //   useMapEvents({
-  //     click: (e) => {
-  //       const newMarker = e.latlng;
-  //       setMarkerPosition(newMarker);
-  //     },
-  //   });
+        if (response.ok) {
+          // Видалення маркера зі списку markers
+          const updatedMarkers = markers.filter((marker) => marker.id !== markerId);
+          setMarkers(updatedMarkers);
+          console.log('Marker deleted successfully');
+        } else {
+          console.log('Error:', response.status);
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+  };
 
-  //   return null;
-  // }
-  // // end 
-
+  
   const center = [50.45156, 30.52530];
 
   const customIcon = new Icon({
@@ -68,11 +74,6 @@ export const Map = memo(({ markers, setMarkers, AddMarkerOnClick }) => {
         chunkedLoading
         iconCreateFunction={createCustomClusterIcon}
       >
-        {/* {markerPosition.map((marker, index) => (
-          <Marker key={index} position={marker} icon={customIcon}>
-            <Popup>Marker {index + 1}</Popup>
-          </Marker>
-        ))} */}
 
         {markers.map(marker => (
           <Marker position={[marker.latitude, marker.longitude]} icon={customIcon}>
@@ -89,7 +90,7 @@ export const Map = memo(({ markers, setMarkers, AddMarkerOnClick }) => {
                 Longitude: {marker.longitude}
                 <br/>
 
-                <Button onClick={() => console.log(marker.id)}>delete</Button>               
+                <Button onClick={handleDelete(marker.id)}>delete</Button>               
               </div>
 
             </Popup>
