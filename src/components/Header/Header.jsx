@@ -9,7 +9,7 @@ import { CustomizedSwitches } from '../ToggleSwitch/Switch';
 
 import './Header.scss';
 
-export const Header = ({markers, setMarkers, isLoading}) => {
+export const Header = ({markers, setMarkers, isLoading, markerPosition}) => {
   const [addingModalActive, setAddingModalActive] = useState(false);
   const [showAllPointsModaL, setShowAllPointsModal] = useState(false);
 
@@ -71,6 +71,7 @@ export const Header = ({markers, setMarkers, isLoading}) => {
           </h2>
 
           <FormField
+            markerPosition={markerPosition}
             modalActive={addingModalActive} 
             setActive={setAddingModalActive}
             markers={markers} 

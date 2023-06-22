@@ -1,4 +1,4 @@
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet'
 import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { memo, useContext, useState } from 'react';
@@ -11,8 +11,24 @@ import Button from '@mui/material/Button';
 import 'leaflet/dist/leaflet.css'
 import './Map.scss';
 
-export const Map = memo(({ markers }) => {
+export const Map = memo(({ markers, setMarkers, AddMarkerOnClick }) => {
   const [map, setMap] = useState(null);
+  // //lat and lng by clicking
+  // const [markerPosition, setMarkerPosition] = useState([]);
+
+  // console.log(markerPosition.lat, markerPosition.lng);
+
+  // function AddMarkerOnClick() {
+  //   useMapEvents({
+  //     click: (e) => {
+  //       const newMarker = e.latlng;
+  //       setMarkerPosition(newMarker);
+  //     },
+  //   });
+
+  //   return null;
+  // }
+  // // end 
 
   const center = [50.45156, 30.52530];
 
@@ -43,12 +59,21 @@ export const Map = memo(({ markers }) => {
       <TileLayer
         attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         url={mapURL}
+        
       />
+
+      <AddMarkerOnClick />
 
       <MarkerClusterGroup
         chunkedLoading
         iconCreateFunction={createCustomClusterIcon}
       >
+        {/* {markerPosition.map((marker, index) => (
+          <Marker key={index} position={marker} icon={customIcon}>
+            <Popup>Marker {index + 1}</Popup>
+          </Marker>
+        ))} */}
+
         {markers.map(marker => (
           <Marker position={[marker.latitude, marker.longitude]} icon={customIcon}>
             <Popup className='popup'>

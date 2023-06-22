@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useMapEvents } from 'react-leaflet'
 import { Footer, Header, Map } from './components';
 
 
@@ -13,7 +14,22 @@ function App() {
     latitude: 50.45156,
     longitude: 30.52530,
     description: 'asdas',
-  }])
+  }]);
+
+  //lat and lng by clicking
+  const [markerPosition, setMarkerPosition] = useState([]);
+
+  function AddMarkerOnClick() {
+    useMapEvents({
+      click: (e) => {
+        const newMarker = e.latlng;
+        setMarkerPosition(newMarker);
+      },
+    });
+
+    return null;
+  }
+  // end 
 
   useEffect(() => {
     const getMarkers = async () => {
@@ -44,12 +60,17 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }} >
       <div className="App">
-        <Header 
+        <Header
+          markerPosition={markerPosition} 
           markers={markers} 
           setMarkers={setMarkers}
           isLoading={isLoading}
         />
-        <Map markers={markers}/>
+        <Map
+          AddMarkerOnClick={AddMarkerOnClick} 
+          markers={markers}
+          setMarkers={setMarkers}  
+        />
         <Footer />
       </div>
     </ThemeContext.Provider>

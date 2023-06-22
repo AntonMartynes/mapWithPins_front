@@ -22,8 +22,8 @@ const validationSchema = yup.object({
 
 });
 
-export const FormField = ({ setActive, markers, setMarkers, modalActive }) => {
-
+export const FormField = ({ setActive, markers, setMarkers, modalActive, markerPosition }) => {
+  console.log(markerPosition);
   const formik = useFormik(
     {
     initialValues: {
@@ -62,6 +62,19 @@ export const FormField = ({ setActive, markers, setMarkers, modalActive }) => {
         setActive(false);
       },
   });
+
+  useEffect(() => {
+    setActive(false);
+    // Оновити initialValues при зміні markerPosition
+    formik.setValues({
+      ...formik.values,
+      latitude: markerPosition.lat || '',
+      longitude: markerPosition.lng || '',
+    });
+    if (formik.values.latitude !== '') {
+      setActive(true);
+    }
+  }, [markerPosition]);
 
   useEffect(() => {
     if (!modalActive) {
