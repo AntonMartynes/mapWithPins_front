@@ -1,4 +1,4 @@
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { memo, useContext, useState } from 'react';
@@ -76,7 +76,11 @@ export const Map = memo(({ markers, setMarkers, AddMarkerOnClick }) => {
       >
 
         {markers.map(marker => (
-          <Marker position={[marker.latitude, marker.longitude]} icon={customIcon}>
+          <Marker 
+            key={marker.id}
+            position={[marker.latitude, marker.longitude]} 
+            icon={customIcon}
+          >
             <Popup className='popup'>
               <div className="popup__text">
                 ID: {marker.id} 

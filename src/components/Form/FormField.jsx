@@ -23,7 +23,6 @@ const validationSchema = yup.object({
 });
 
 export const FormField = ({ setActive, markers, setMarkers, modalActive, markerPosition }) => {
-  console.log(markerPosition);
   const formik = useFormik(
     {
     initialValues: {
